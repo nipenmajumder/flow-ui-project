@@ -79,7 +79,7 @@ export const useAuth = create<AuthState>()(
 );
 
 // Protected Route HOC
-export const withAuth = <P extends Record<string, any>>(Component: React.ComponentType<P>) => {
+export function withAuth<P extends Record<string, any>>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P) => {
     const { isAuthenticated } = useAuth();
     
@@ -92,4 +92,4 @@ export const withAuth = <P extends Record<string, any>>(Component: React.Compone
   };
   
   return WrappedComponent;
-};
+}
