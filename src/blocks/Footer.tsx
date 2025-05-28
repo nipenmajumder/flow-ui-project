@@ -1,8 +1,11 @@
 
 import { siteConfig } from "@/lib/config";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,12 +18,12 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Navigation</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('navigation')}</h4>
             <ul className="space-y-2">
               {siteConfig.navigation.public.map((item) => (
                 <li key={item.name}>
                   <Link to={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.name}
+                    {t(item.name.toLowerCase())}
                   </Link>
                 </li>
               ))}
@@ -28,16 +31,16 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Account</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('account')}</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/login" className="text-gray-400 hover:text-white transition-colors">
-                  Login
+                <Link to="/auth/login" className="text-gray-400 hover:text-white transition-colors">
+                  {t('login')}
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="text-gray-400 hover:text-white transition-colors">
-                  Register
+                <Link to="/auth/register" className="text-gray-400 hover:text-white transition-colors">
+                  {t('register')}
                 </Link>
               </li>
             </ul>
@@ -46,7 +49,7 @@ export const Footer = () => {
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 {siteConfig.name}. All rights reserved.
+            © 2024 {siteConfig.name}. {t('allRightsReserved')}.
           </p>
         </div>
       </div>

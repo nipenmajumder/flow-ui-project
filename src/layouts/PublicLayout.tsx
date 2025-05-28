@@ -4,16 +4,20 @@ import { siteConfig } from "@/lib/config";
 import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { DarkModeToggle } from "@/components/DarkModeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const PublicLayout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <header className="bg-background shadow-sm border-b sticky top-0 z-50 dark:bg-gray-900 dark:border-gray-800">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="text-2xl font-bold text-gray-900">
+            <Link to="/" className="text-2xl font-bold text-foreground">
               {siteConfig.name}
             </Link>
             
@@ -23,17 +27,19 @@ export const PublicLayout = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {item.name}
+                  {t(item.name.toLowerCase())}
                 </Link>
               ))}
               <div className="flex items-center space-x-4">
+                <DarkModeToggle />
+                <LanguageSwitcher />
                 <Button variant="ghost" asChild>
-                  <Link to="/auth/login">Login</Link>
+                  <Link to="/auth/login">{t('login')}</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/auth/register">Get Started</Link>
+                  <Link to="/auth/register">{t('getStarted')}</Link>
                 </Button>
               </div>
             </div>
@@ -49,27 +55,33 @@ export const PublicLayout = () => {
           
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t">
+            <div className="md:hidden py-4 border-t border-border">
               <div className="flex flex-col space-y-4">
                 {siteConfig.navigation.public.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {item.name}
+                    {t(item.name.toLowerCase())}
                   </Link>
                 ))}
-                <div className="flex flex-col space-y-2 pt-4 border-t">
+                <div className="flex items-center justify-between pt-4 border-t border-border">
+                  <div className="flex items-center space-x-4">
+                    <DarkModeToggle />
+                    <LanguageSwitcher />
+                  </div>
+                </div>
+                <div className="flex flex-col space-y-2">
                   <Button variant="ghost" asChild>
                     <Link to="/auth/login" onClick={() => setIsMenuOpen(false)}>
-                      Login
+                      {t('login')}
                     </Link>
                   </Button>
                   <Button asChild>
                     <Link to="/auth/register" onClick={() => setIsMenuOpen(false)}>
-                      Get Started
+                      {t('getStarted')}
                     </Link>
                   </Button>
                 </div>

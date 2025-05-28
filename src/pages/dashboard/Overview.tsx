@@ -3,9 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
 import { Activity, Users, TrendingUp, DollarSign } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 export const Overview = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const stats = [
     {
@@ -37,11 +39,11 @@ export const Overview = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">
-          Welcome back, {user?.name}!
+        <h1 className="text-3xl font-bold text-foreground">
+          {t('welcomeDashboard')}, {user?.name}!
         </h1>
-        <p className="text-gray-600 mt-2">
-          Here's what's happening with your account today.
+        <p className="text-muted-foreground mt-2">
+          {t('dashboardSubtitle')}
         </p>
       </div>
 
