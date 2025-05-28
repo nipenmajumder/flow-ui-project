@@ -65,7 +65,7 @@ export const Register = () => {
         </h1>
         <p className="text-gray-600">
           Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:text-blue-700">
+          <Link to="/auth/login" className="text-blue-600 hover:text-blue-700">
             Sign in
           </Link>
         </p>

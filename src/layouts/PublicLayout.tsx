@@ -30,10 +30,10 @@ export const PublicLayout = () => {
               ))}
               <div className="flex items-center space-x-4">
                 <Button variant="ghost" asChild>
-                  <Link to="/login">Login</Link>
+                  <Link to="/auth/login">Login</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/register">Get Started</Link>
+                  <Link to="/auth/register">Get Started</Link>
                 </Button>
               </div>
             </div>
@@ -63,12 +63,12 @@ export const PublicLayout = () => {
                 ))}
                 <div className="flex flex-col space-y-2 pt-4 border-t">
                   <Button variant="ghost" asChild>
-                    <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/auth/login" onClick={() => setIsMenuOpen(false)}>
                       Login
                     </Link>
                   </Button>
                   <Button asChild>
-                    <Link to="/register" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/auth/register" onClick={() => setIsMenuOpen(false)}>
                       Get Started
                     </Link>
                   </Button>

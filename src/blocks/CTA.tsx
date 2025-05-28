@@ -17,7 +17,7 @@ export const CTA = () => {
           {cta.description}
         </p>
         <Button asChild size="lg" variant="secondary" className="px-8 py-6 text-lg">
-          <Link to="/register">
+          <Link to="/auth/register">
             {cta.buttonText}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>

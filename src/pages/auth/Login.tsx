@@ -53,7 +53,7 @@ export const Login = () => {
         </h1>
         <p className="text-gray-600">
           Or{' '}
-          <Link to="/register" className="text-blue-600 hover:text-blue-700">
+          <Link to="/auth/register" className="text-blue-600 hover:text-blue-700">
             create a new account
           </Link>
         </p>
