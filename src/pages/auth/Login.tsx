@@ -1,48 +1,32 @@
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
 export const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
-  const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     setIsLoading(true);
     
     try {
-      await login(formData.email, formData.password);
+      await login();
       toast({
-        title: "Welcome back!",
-        description: "You have successfully logged in.",
+        title: "Redirecting to login",
+        description: "You will be redirected to Keycloak login page.",
       });
-      navigate('/dashboard');
     } catch (error) {
       toast({
         title: "Login failed",
-        description: "Please check your credentials and try again.",
+        description: "Unable to redirect to login page. Please try again.",
         variant: "destructive",
       });
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
   };
 
   return (
@@ -59,37 +43,11 @@ export const Login = () => {
         </p>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="email">Email address</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="mt-1"
-          />
-        </div>
-        
-        <div>
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="mt-1"
-          />
-        </div>
-        
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? 'Signing in...' : 'Sign in'}
+      <div className="space-y-4">
+        <Button onClick={handleLogin} className="w-full" disabled={isLoading}>
+          {isLoading ? 'Redirecting...' : 'Sign in with Keycloak'}
         </Button>
-      </form>
+      </div>
       
       <div className="mt-4 text-center">
         <Link to="#" className="text-sm text-blue-600 hover:text-blue-700">

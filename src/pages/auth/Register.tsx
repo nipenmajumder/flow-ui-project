@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 export const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -33,7 +34,7 @@ export const Register = () => {
     setIsLoading(true);
     
     try {
-      await register(formData.name, formData.email, formData.password);
+      await register(formData.name, formData.email, formData.password, formData.username);
       toast({
         title: "Account created!",
         description: "Welcome! Your account has been created successfully.",
@@ -42,7 +43,7 @@ export const Register = () => {
     } catch (error) {
       toast({
         title: "Registration failed",
-        description: "Please try again with different credentials.",
+        description: "Please try again. Note: Registration requires backend setup for Keycloak Admin API.",
         variant: "destructive",
       });
     } finally {
@@ -78,6 +79,18 @@ export const Register = () => {
             id="name"
             name="name"
             value={formData.name}
+            onChange={handleChange}
+            required
+            className="mt-1"
+          />
+        </div>
+        
+        <div>
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            name="username"
+            value={formData.username}
             onChange={handleChange}
             required
             className="mt-1"
@@ -127,6 +140,12 @@ export const Register = () => {
           {isLoading ? 'Creating account...' : 'Create account'}
         </Button>
       </form>
+      
+      <div className="mt-4 text-center">
+        <p className="text-sm text-gray-600">
+          Note: Registration requires backend configuration for Keycloak Admin API
+        </p>
+      </div>
     </div>
   );
 };
